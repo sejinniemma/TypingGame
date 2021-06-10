@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: url(./img/background.jpg) ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.starter{ 
+    color: white;
+    font-size: 38px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 3rem auto;
+    padding: 1rem 1.5rem;
+}
+
+.loading{
+    background-color: lightgray;
+    cursor: not-allowed;
+}
+
+.world-display{
+    color: white;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.word-input{
+    padding:10px 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.game-info{
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin:20px 0;
+    font-size: 30px;
+}
+
+.time{
+    padding-right: 20px;
+}
