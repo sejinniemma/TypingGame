@@ -8,28 +8,42 @@
 const starter = document.querySelector('.starter');
 const worldDisplay= document.querySelector('.world-display');
 const worldDisplayArray = ['바나나','사과','연필','밥','과일'];
-   starter.addEventListener('click', () => {
+const inputBox = document.querySelector('.word-input-box');
+const input = document.querySelector('input');
+const Time = document.querySelector('.time');
+const Score = document.querySelector('.score');
+let score = 0;
+ 
+starter.addEventListener('click', () => {
         displayItems();
+        write();
    })
 
    let i=0;
    function displayItems(){
    setInterval( ()=>{
+    input.value="";
        if(i<worldDisplayArray.length){
        worldDisplay.innerHTML = worldDisplayArray[i];
        i++;
+       input.value="";
         } else {
             worldDisplay.innerHTML = 'fail';
         }
-      } ,2000)
+      } ,3000)
     }
 
-
-
-
- 
-     
-        
+function write(){
+input.addEventListener('input',(e)=>{
+  if(e.target.value === worldDisplay.innerHTML){
+        Score.innerHTML = score + 1;
+        score++;
+        input.value="";
+      }else if(e.target.value !== worldDisplay.innerHTML){
+        return;
+      }
+      })
+    }
   
 
 
