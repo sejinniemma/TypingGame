@@ -10,19 +10,20 @@ const worldDisplay= document.querySelector('.world-display');
 const worldDisplayArray = ['바나나','사과','연필','밥','과일'];
 const inputBox = document.querySelector('.word-input-box');
 const input = document.querySelector('input');
-const Time = document.querySelector('.time');
+const time = document.querySelector('.time');
 const Score = document.querySelector('.score');
 let score = 0;
- 
+let timeDuration=5; 
+
 starter.addEventListener('click', () => {
         displayItems();
         write();
+        Time();
    })
 
    let i=0;
    function displayItems(){
    setInterval( ()=>{
-    input.value="";
        if(i<worldDisplayArray.length){
        worldDisplay.innerHTML = worldDisplayArray[i];
        i++;
@@ -34,16 +35,33 @@ starter.addEventListener('click', () => {
     }
 
 function write(){
-input.addEventListener('input',(e)=>{
-  if(e.target.value === worldDisplay.innerHTML){
-        Score.innerHTML = score + 1;
-        score++;
-        input.value="";
-      }else if(e.target.value !== worldDisplay.innerHTML){
-        return;
-      }
+    input.addEventListener('input',(e)=>{
+     
+        if(worldDisplay.innerHTML===""){
+          e.target.value="";
+        }
+        else if(e.target.value === worldDisplay.innerHTML){
+            Score.innerHTML = score + 1;
+            score++;
+            input.value="";
+          }
+           else if(e.target.value !== worldDisplay.innerHTML){
+            return;
+          }
       })
     }
   
 
+
+function Time(){
+
+  let clock=setInterval(()=>{
+     if(timeDuration===0){
+      clearInterval(clock);
+      worldDisplay.innerHTML = 'fail';
+    }
+    time.innerHTML = timeDuration;
+    --timeDuration;
+  },3000)
+}
 
