@@ -1,5 +1,5 @@
 'use srict'
-
+const GAME_TIME = 5;
 const starterBtn = document.querySelector('.starter');
 const wordDisplay = document.querySelector('.world-display');
 const wordDisplayArray = ['바나나','사과','연필','밥','과일'];
@@ -9,20 +9,29 @@ const time = document.querySelector('.time');
 const Score = document.querySelector('.score');
 
 let isPlaying = false;
+let checkInterval;
 let timeInterval;
 let score = 0;
-let timeDuration=5; 
+let timeDuration = GAME_TIME;
 
-
+// click starterBtn
 starterBtn.addEventListener('click', () => {
         buttonChange('Start!');
         displayItems();
-        write();
         run();
+        checkInterval = setInterval(checkStatus, 50);
    })
 
 
+   // check time status
+function checkStatus(){
+  if(!isPlaying && timeDuration === 0){
+    buttonChange('loading');
+    clearInterval(checkInterval);
+  }
+}
 
+// display word array
    let i=0;
    function displayItems(){
    setInterval( ()=>{
@@ -38,34 +47,34 @@ starterBtn.addEventListener('click', () => {
     }
 
 
+// put something Input
+ wordInput.addEventListener('input', checkMatch);
 
-function write (){
-    wordInput.addEventListener('input',()=>{
-        if(wordDisplay.innerText===""){
-          e.target.value="";
-         
+    function checkMatch(){
+      if(wordInput.value === wordDisplay.innerText){
+        wordInput.value="";
+        if(!isPlaying){
+          return;
         }
-        else if(wordInput.value === wordDisplay.innerText){
-            wordInput.value="";
-            score++;
-            Score.innerHTML = score;
-          }
-          else if(wordInput.value !== wordDisplay.innerText){
-             return;
-          }
-          
-      })
+        score++;
+        Score.innerHTML = score;
+      }
+      else if(wordInput.value !== wordDisplay.innerText){
+         return;
+      }
     }
   
 
 // Make timer
 function run(){
+  isPlaying = true;
+  timeDuration = GAME_TIME;
   timeInterval = setInterval(countDown, 3000);
 }
 
 function countDown(){
-  timeDuration > 0 ? --timeDuration : isPlaying;
-     if(isPlaying){
+  timeDuration > 0 ? --timeDuration : isPlaying = false;
+     if(!isPlaying){
       clearInterval(timeInterval);
       buttonChange('loading');
      }
