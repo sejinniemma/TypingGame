@@ -7,23 +7,27 @@ const inputBox = document.querySelector('.word-input-box');
 const wordInput = document.querySelector('input');
 const time = document.querySelector('.time');
 const Score = document.querySelector('.score');
+const messageResult = document.querySelector('.message_result');
+
 
 let isPlaying = false;
-let checkInterval;
-let timeInterval;
-let score = 0;
 let timeDuration = GAME_TIME;
+let score = 0;
+let timeInterval;
+let checkInterval;
+
+buttonChange('Start!');
 
 // click starterBtn
 starterBtn.addEventListener('click', () => {
-        buttonChange('Start!');
+        buttonChange('loading');
         displayItems();
         run();
         checkInterval = setInterval(checkStatus, 50);
    })
 
 
-   // check time status
+// check time status
 function checkStatus(){
   if(!isPlaying && timeDuration === 0){
     buttonChange('loading');
@@ -35,14 +39,15 @@ function checkStatus(){
    let i=0;
    function displayItems(){
    setInterval( ()=>{
-       if(i<wordDisplayArray.length){
+       if(i < wordDisplayArray.length){
        wordDisplay.innerHTML = wordDisplayArray[i];
        i++;
        wordInput.value="";
-       
-        } else {
-            wordDisplay.innerHTML = 'fail';
-        }
+        } 
+          else{
+        wordDisplay.innerHTML = 'End'
+      }
+        
       } ,3000)
     }
 
@@ -58,9 +63,9 @@ function checkStatus(){
         }
         score++;
         Score.innerHTML = score;
-      }
-      else if(wordInput.value !== wordDisplay.innerText){
-         return;
+        if(score >= 5){
+          messageResult.appendChild(messageDisplay('You are a master 🤡'));
+        }
       }
     }
   
@@ -77,6 +82,7 @@ function countDown(){
      if(!isPlaying){
       clearInterval(timeInterval);
       buttonChange('loading');
+      messageResult.appendChild(messageDisplay('The End'));
      }
     time.innerHTML = timeDuration;
 }
@@ -88,3 +94,22 @@ function buttonChange(text){
   starterBtn.innerText = text;
   text === 'Start!' ? starterBtn.classList.remove('loading') : starterBtn.classList.add('loading');
 }
+
+// messageDisplay
+
+function messageDisplay(text){
+  const messageContainer=document.createElement('div');
+  messageContainer.setAttribute('class','message_container');
+
+  messageContainer.innerHTML=` 
+    <div class="message_box">
+        <div class="message">${text}</div>
+        <button class="replay_buttton"><i class="fas fa-reply"></i></button>
+    </div>
+`;
+
+return messageContainer;
+}
+
+
+
