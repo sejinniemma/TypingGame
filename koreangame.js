@@ -7,7 +7,8 @@ const inputBox = document.querySelector('.word-input-box');
 const wordInput = document.querySelector('input');
 const time = document.querySelector('.time');
 const Score = document.querySelector('.score');
-const messageResult = document.querySelector('.message_result');
+const message = document.querySelector('.message');
+const messageContainer = document.querySelector('.message_container');
 
 
 let isPlaying = false;
@@ -64,7 +65,8 @@ function checkStatus(){
         score++;
         Score.innerHTML = score;
         if(score >= 5){
-          messageResult.appendChild(messageDisplay('You are a master 🤡'));
+          messageContainer.style.opacity=1;
+          message.innerHTML = 'You are a master🤡'
         }
       }
     }
@@ -82,7 +84,8 @@ function countDown(){
      if(!isPlaying){
       clearInterval(timeInterval);
       buttonChange('loading');
-      messageResult.appendChild(messageDisplay('The End'));
+      messageContainer.style.opacity=1;
+      message.innerHTML='The End'
      }
     time.innerHTML = timeDuration;
 }
@@ -95,21 +98,9 @@ function buttonChange(text){
   text === 'Start!' ? starterBtn.classList.remove('loading') : starterBtn.classList.add('loading');
 }
 
-// messageDisplay
 
-function messageDisplay(text){
-  const messageContainer=document.createElement('div');
-  messageContainer.setAttribute('class','message_container');
 
-  messageContainer.innerHTML=` 
-    <div class="message_box">
-        <div class="message">${text}</div>
-        <button class="replay_buttton"><i class="fas fa-reply"></i></button>
-    </div>
-`;
 
-return messageContainer;
-}
 
 
 
