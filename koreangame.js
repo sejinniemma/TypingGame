@@ -9,6 +9,7 @@ const time = document.querySelector('.time');
 const Score = document.querySelector('.score');
 const message = document.querySelector('.message');
 const messageContainer = document.querySelector('.message_container');
+const replayBtn = document.querySelector('.replay_button');
 
 
 let isPlaying = false;
@@ -24,31 +25,19 @@ starterBtn.addEventListener('click', () => {
         buttonChange('loading');
         displayItems();
         run();
-        checkInterval = setInterval(checkStatus, 50);
    })
 
 
-// check time status
-function checkStatus(){
-  if(!isPlaying && timeDuration === 0){
-    buttonChange('loading');
-    clearInterval(checkInterval);
-  }
-}
-
 // display word array
-   let i=0;
+  
    function displayItems(){
+    let i=0;
    setInterval( ()=>{
        if(i < wordDisplayArray.length){
        wordDisplay.innerHTML = wordDisplayArray[i];
        i++;
        wordInput.value="";
         } 
-          else{
-        wordDisplay.innerHTML = 'End'
-      }
-        
       } ,3000)
     }
 
@@ -83,9 +72,9 @@ function countDown(){
   timeDuration > 0 ? --timeDuration : isPlaying = false;
      if(!isPlaying){
       clearInterval(timeInterval);
-      buttonChange('loading');
+      buttonChange('Start!');
       messageContainer.style.opacity=1;
-      message.innerHTML='The End'
+      message.innerHTML='The End';
      }
     time.innerHTML = timeDuration;
 }
@@ -98,7 +87,16 @@ function buttonChange(text){
   text === 'Start!' ? starterBtn.classList.remove('loading') : starterBtn.classList.add('loading');
 }
 
+// replay button
 
+replayBtn.addEventListener('click',()=>{
+        buttonChange('loading');
+        displayItems();
+        run();
+        messageContainer.style.opacity=0;
+        score = 0;
+        Score.innerHTML = score;
+})
 
 
 

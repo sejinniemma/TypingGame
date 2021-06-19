@@ -92,7 +92,7 @@ input{
     font-weight: 700;
 }
 
-.replay_buttton{
+.replay_button{
     margin-top: 20px;
     font-size: 50px;
     background-color:rgb(219, 94, 131);
@@ -102,6 +102,6 @@ input{
     transition: transform 300ms;
 }
 
-.replay_buttton:hover{
+.replay_button:hover{
     transform: scale(1.1) rotate(-15deg);
 }
