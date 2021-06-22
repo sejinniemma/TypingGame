@@ -22,16 +22,19 @@ buttonChange('Start!');
 
 // click starterBtn
 starterBtn.addEventListener('click', () => {
-        buttonChange('loading');
-        displayItems();
-        run();
+        gameStart();
    })
 
+function gameStart(){
+  buttonChange('loading');
+  displayItems();
+  run();
+}
 
 // display word array
   
    function displayItems(){
-    let i=0;
+   let i=0;
    setInterval( ()=>{
        if(i < wordDisplayArray.length){
        wordDisplay.innerHTML = wordDisplayArray[i];
@@ -53,7 +56,8 @@ starterBtn.addEventListener('click', () => {
         }
         score++;
         Score.innerHTML = score;
-        if(score >= 5){
+        
+        if(score >= 5 && timeDuration > 0){
           messageContainer.style.opacity=1;
           message.innerHTML = 'You are a master🤡'
         }
@@ -70,11 +74,12 @@ function run(){
 
 function countDown(){
   timeDuration > 0 ? --timeDuration : isPlaying = false;
-     if(!isPlaying){
+     if(!isPlaying && score < 5){
       clearInterval(timeInterval);
       buttonChange('Start!');
       messageContainer.style.opacity=1;
       message.innerHTML='The End';
+      
      }
     time.innerHTML = timeDuration;
 }
@@ -87,12 +92,10 @@ function buttonChange(text){
   text === 'Start!' ? starterBtn.classList.remove('loading') : starterBtn.classList.add('loading');
 }
 
-// replay button
 
+// replay button
 replayBtn.addEventListener('click',()=>{
-        buttonChange('loading');
-        displayItems();
-        run();
+        gameStart();
         messageContainer.style.opacity=0;
         score = 0;
         Score.innerHTML = score;
@@ -102,3 +105,7 @@ replayBtn.addEventListener('click',()=>{
 
 
 
+// opaicty 버튼땜에 안댐 다시 스트링템플릿으로 해보기
+// 글자 따라나오는거 고치기
+// 배열....?
+// 한번만 글자 칠 수 있는 건 어케할수 있는지...
