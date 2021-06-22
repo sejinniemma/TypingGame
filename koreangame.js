@@ -34,14 +34,17 @@ function gameStart(){
 // display word array
   
    function displayItems(){
-   let i=0;
-   setInterval( ()=>{
+    let i = 0;
+   const displayTime = setInterval( ()=>{
        if(i < wordDisplayArray.length){
        wordDisplay.innerHTML = wordDisplayArray[i];
        i++;
        wordInput.value="";
+       if(!isPlaying || score >= 5){
+         clearInterval(displayTime);
+        }
         } 
-      } ,3000)
+      } ,2000)
     }
 
 
@@ -59,7 +62,8 @@ function gameStart(){
         
         if(score >= 5 && timeDuration > 0){
           messageContainer.style.opacity=1;
-          message.innerHTML = 'You are a master🤡'
+          message.innerHTML = 'You are a master🤡';
+          buttonChange('Start!');
         }
       }
     }
@@ -69,7 +73,7 @@ function gameStart(){
 function run(){
   isPlaying = true;
   timeDuration = GAME_TIME;
-  timeInterval = setInterval(countDown, 3000);
+  timeInterval = setInterval(countDown, 2000);
 }
 
 function countDown(){
@@ -80,6 +84,8 @@ function countDown(){
       messageContainer.style.opacity=1;
       message.innerHTML='The End';
       
+     }else if(score >= 5){
+       clearInterval(timeInterval);
      }
     time.innerHTML = timeDuration;
 }
