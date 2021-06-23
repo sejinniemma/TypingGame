@@ -8,7 +8,8 @@ const wordInput = document.querySelector('input');
 const time = document.querySelector('.time');
 const Score = document.querySelector('.score');
 const message = document.querySelector('.message');
-const container =document.querySelector('.container');
+const replayBtn = document.querySelector('.replay_button');
+const messageContainer = document.querySelector('.message_container');
 
 
 
@@ -49,26 +50,25 @@ function gameStart(){
 
 
 // put something Input
- wordInput.addEventListener('input', checkMatch);
+ wordInput.addEventListener('input',checkMatch)
 
     function checkMatch(){
-      
-        if(wordInput.value===wordDisplay.innerText && wordInput.value!==''){
+
+        if(wordInput.value === wordDisplay.innerText && wordInput.value!==''){
           wordInput.value="";
           if(!isPlaying){
           return;}
-
           score++;
           Score.innerHTML = score; 
 
           if(score >= 5 && timeDuration > 0){
-            replay('You are a master🤡');
+            message.innerHTML='You are a master🤡';
+            messageContainer.style.visibility='visible'; 
             buttonChange('Start!');
           }
           
     }
   }
-  
 
 // Make timer
 function run(){
@@ -82,9 +82,10 @@ function countDown(){
      if(!isPlaying && score < 5){
       clearInterval(timeInterval);
       buttonChange('Start!');
-      replay('The End');
-      
-     }else if(score >= 5){
+      message.innerHTML='The End';
+      messageContainer.style.visibility='visible';  
+     } 
+     else if(score >= 5){
        clearInterval(timeInterval);
      }
     time.innerHTML = timeDuration;
@@ -100,34 +101,36 @@ function buttonChange(text){
 
 
 // replay button
-// replayBtn.addEventListener('click',()=>{
-//         gameStart();
-//         messageContainer.style.opacity=0;
-//         score = 0;
-//         Score.innerHTML = score;
-// })
+ replayBtn.addEventListener('click',()=>{
+     gameStart();
+     messageContainer.style.display='none';
+     score = 0;
+     Score.innerHTML = score;
+ })
 
 
 
 
-  function replay(text){
-        const messageContainer = document.createElement('div');
-        messageContainer.setAttribute('class','message_container');
+  // function replay(text){
+  //       const messageContainer = document.createElement('div');
+  //       messageContainer.setAttribute('class','message_container');
         
-        messageContainer.innerHTML=`
-        <div class="message_box">
-          <div class="message">${text}</div>
-          <button class="replay_button"><i class="fas fa-reply"></i></button>
-        </div>
-      `;
+  //       messageContainer.innerHTML=`
+  //       <div class="message_box">
+  //         <div class="message">${text}</div>
+         
+  //       </div>
+  //     `;
 
       
-       return container.appendChild(messageContainer);  
-  }
+   
+  //      container.appendChild(messageContainer);  
+  //      messageContainer.appendChild(replayBtn);
+  //      return container;
+  // }
 
 
 
 
 // opaicty 버튼땜에 안댐 다시 스트링템플릿으로 해보기
 // 글자 따라나오는거 고치기
-// 빈공간일때 점수 올라가는거 막기
