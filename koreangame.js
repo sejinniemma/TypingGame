@@ -8,8 +8,8 @@ const wordInput = document.querySelector('input');
 const time = document.querySelector('.time');
 const Score = document.querySelector('.score');
 const message = document.querySelector('.message');
-const messageContainer = document.querySelector('.message_container');
-const replayBtn = document.querySelector('.replay_button');
+const container =document.querySelector('.container');
+
 
 
 let isPlaying = false;
@@ -58,11 +58,9 @@ function gameStart(){
           return;
         }
         score++;
-        Score.innerHTML = score;
-        
+        Score.innerHTML = score;    
         if(score >= 5 && timeDuration > 0){
-          messageContainer.style.opacity=1;
-          message.innerHTML = 'You are a master🤡';
+          replay('You are a master🤡');
           buttonChange('Start!');
         }
       }
@@ -73,7 +71,7 @@ function gameStart(){
 function run(){
   isPlaying = true;
   timeDuration = GAME_TIME;
-  timeInterval = setInterval(countDown, 2000);
+  timeInterval = setInterval(countDown, 1000);
 }
 
 function countDown(){
@@ -81,8 +79,7 @@ function countDown(){
      if(!isPlaying && score < 5){
       clearInterval(timeInterval);
       buttonChange('Start!');
-      messageContainer.style.opacity=1;
-      message.innerHTML='The End';
+      replay('The End');
       
      }else if(score >= 5){
        clearInterval(timeInterval);
@@ -100,12 +97,26 @@ function buttonChange(text){
 
 
 // replay button
-replayBtn.addEventListener('click',()=>{
-        gameStart();
-        messageContainer.style.opacity=0;
-        score = 0;
-        Score.innerHTML = score;
-})
+// replayBtn.addEventListener('click',()=>{
+//         gameStart();
+//         messageContainer.style.opacity=0;
+//         score = 0;
+//         Score.innerHTML = score;
+// })
+
+
+  function replay(text){
+        const messageContainer = document.createElement('div');
+        messageContainer.setAttribute('class','message_container');
+        
+        messageContainer.innerHTML=`
+        <div class="message_box">
+          <div class="message">${text}</div>
+          <button class="replay_button"><i class="fas fa-reply"></i></button>
+        </div>
+      `;
+       return container.appendChild(messageContainer);  
+  }
 
 
 
@@ -113,5 +124,4 @@ replayBtn.addEventListener('click',()=>{
 
 // opaicty 버튼땜에 안댐 다시 스트링템플릿으로 해보기
 // 글자 따라나오는거 고치기
-// 배열....?
-// 한번만 글자 칠 수 있는 건 어케할수 있는지...
+// 빈공간일때 점수 올라가는거 막기
