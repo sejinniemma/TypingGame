@@ -44,7 +44,7 @@ function gameStart(){
          clearInterval(displayTime);
         }
         } 
-      } ,2000)
+      } ,3000)
     }
 
 
@@ -52,26 +52,29 @@ function gameStart(){
  wordInput.addEventListener('input', checkMatch);
 
     function checkMatch(){
-      if(wordInput.value === wordDisplay.innerText){
-        wordInput.value="";
-        if(!isPlaying){
-          return;
-        }
-        score++;
-        Score.innerHTML = score;    
-        if(score >= 5 && timeDuration > 0){
-          replay('You are a master🤡');
-          buttonChange('Start!');
-        }
-      }
+      
+        if(wordInput.value===wordDisplay.innerText && wordInput.value!==''){
+          wordInput.value="";
+          if(!isPlaying){
+          return;}
+
+          score++;
+          Score.innerHTML = score; 
+
+          if(score >= 5 && timeDuration > 0){
+            replay('You are a master🤡');
+            buttonChange('Start!');
+          }
+          
     }
+  }
   
 
 // Make timer
 function run(){
   isPlaying = true;
   timeDuration = GAME_TIME;
-  timeInterval = setInterval(countDown, 1000);
+  timeInterval = setInterval(countDown, 3000);
 }
 
 function countDown(){
@@ -105,6 +108,8 @@ function buttonChange(text){
 // })
 
 
+
+
   function replay(text){
         const messageContainer = document.createElement('div');
         messageContainer.setAttribute('class','message_container');
@@ -115,9 +120,10 @@ function buttonChange(text){
           <button class="replay_button"><i class="fas fa-reply"></i></button>
         </div>
       `;
+
+      
        return container.appendChild(messageContainer);  
   }
-
 
 
 
