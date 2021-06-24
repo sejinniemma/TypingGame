@@ -13,6 +13,7 @@ const messageContainer = document.querySelector('.message_container');
 
 
 
+
 let isPlaying = false;
 let timeDuration = GAME_TIME;
 let score = 0;
@@ -23,13 +24,16 @@ buttonChange('Start!');
 
 // click starterBtn
 starterBtn.addEventListener('click', () => {
-        gameStart();
+        gameStart(); 
+        setTimeout(()=>timeSound.play(),3000);
+        startSound.play();
    })
 
 function gameStart(){
   buttonChange('loading');
   displayItems();
   run();
+ 
 }
 
 // display word array
@@ -65,6 +69,8 @@ function gameStart(){
             message.innerHTML='You are a master🤡';
             messageContainer.style.visibility='visible'; 
             buttonChange('Start!');
+            timeSound.pause();
+            winSound.play();
           }
           
     }
@@ -83,7 +89,8 @@ function countDown(){
       clearInterval(timeInterval);
       buttonChange('Start!');
       message.innerHTML='The End';
-      messageContainer.style.visibility='visible';  
+      messageContainer.style.visibility='visible';
+      timeSound.pause();  
      } 
      else if(score >= 5){
        clearInterval(timeInterval);
@@ -103,10 +110,19 @@ function buttonChange(text){
 // replay button
  replayBtn.addEventListener('click',()=>{
      gameStart();
-     messageContainer.style.display='none';
+     messageContainer.style.visibility='hidden';
      score = 0;
      Score.innerHTML = score;
+     startSound.play();
+     timeSound.play();
  })
+
+
+ // sound
+const timeSound = new Audio('sound/clock2.wav');
+const winSound = new Audio('sound/033_와우.wav');
+const startSound = new Audio('sound/carrot_pull.mp3');
+
 
 
 
@@ -132,5 +148,5 @@ function buttonChange(text){
 
 
 
-// opaicty 버튼땜에 안댐 다시 스트링템플릿으로 해보기
+// visible 로 바꿔서 클릭 안되게 했고 스트링템플릿으로 안의 요소를 돔으로 가져올수 없었음.
 // 글자 따라나오는거 고치기
