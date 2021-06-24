@@ -1,9 +1,19 @@
 # Typing-game ver.1
 
-### ✨ 서비스 소개
+## ✨ 서비스 소개
 
-### �What is this Game
- - This is the Korean Typing game for student in Australia who are learning Korean from my sister.
+
+
+🎮 같은단어를 타이핑하면 1점씩 점수를 획득하는 게임 🎮 
+
+
+<img width="936" alt="게임소개" src="https://user-images.githubusercontent.com/80943394/123232982-a2a95280-d514-11eb-8361-bcdf770c1ba6.png">
+
+
+
+
+### 목적
+- This is the Korean Typing game for student in Australia who are learning Korean from my sister.
  - When they put same word with the word which is given, they can get a score.
  - if they get more then 5 score within 3ms, they will win the game.
  
