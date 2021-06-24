@@ -1,33 +1,32 @@
 # Typing-game ver.1
 
-## ✨ 서비스 소개
+## ✨ Introduce Service
 
 
 
-🎮 같은단어를 타이핑하면 1점씩 점수를 획득하는 게임 🎮 
-
-
-<img width="936" alt="게임소개" src="https://user-images.githubusercontent.com/80943394/123232982-a2a95280-d514-11eb-8361-bcdf770c1ba6.png">
+🎮 Game which is getting a point whenever you are typing same korean word quickly 🎮 
 
 
 
+<img width="566" alt="제목 없음" src="https://user-images.githubusercontent.com/80943394/123236281-a2f71d00-d517-11eb-9ed1-110ff9448df6.png">
 
-### 목적
+
+
+
+### for whom ?
 - This is the Korean Typing game for student in Australia who are learning Korean from my sister.
  - When they put same word with the word which is given, they can get a score.
  - if they get more then 5 score within 3ms, they will win the game.
+ - I hope they can enjoy studying Korean by using this game.
  
 
 
-### Main function
- - 한글단어의 배열을 만들고 
- let i=0을 선언해 배열의 길이보다 작을 때까지 3초마다 배열의 0번째 단어부터 화면에 나올 수 있게 한후에
- 화면에 나온 글자와 addeventListener를 등록해 글자를 타이핑 했을때 input.value값과 화면에 나온 값이 같을때
- 점수가 계속 1점씩 더해질 수 있도록 만들었다.
+### main function 
+ - setInterval
  
 
 
-### 오류 해결
+### error 🐱‍🚀
 
 
     1. 빈값일때 점수증가 문제(빈값으로 서로 같아지면서)
